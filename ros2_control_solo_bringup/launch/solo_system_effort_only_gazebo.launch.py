@@ -43,9 +43,11 @@ def generate_launch_description():
 
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            [PathJoinSubstitution([FindPackageShare("gazebo_ros"), "launch", "gazebo.launch.py"])]
+            [PathJoinSubstitution(
+                [FindPackageShare("gazebo_ros"), "launch", "gazebo.launch.py"])]
         ),
-        launch_arguments={"verbose": "false", "pause": "true", "world": world_model}.items(),
+        launch_arguments={"verbose": "false",
+                          "pause": "true", "world": world_model}.items(),
     )
 
     # Get URDF via xacro
@@ -85,20 +87,21 @@ def generate_launch_description():
     spawn_entity = Node(
         package="gazebo_ros",
         executable="spawn_entity.py",
-        arguments=["-file", sdf_model, "-entity", "solo", "-x 0", "-y 0", "-z 0.5"],
+        arguments=["-file", sdf_model, "-entity",
+                   "solo", "-x 0", "-y 0", "-z 0.5"],
         output="screen",
     )
 
     spawn_controller = Node(
         package="controller_manager",
-        executable="spawner.py",
+        executable="spawner",
         arguments=["joint_state_broadcaster"],
         output="screen",
     )
 
     spawn_controller_effort = Node(
         package="controller_manager",
-        executable="spawner.py",
+        executable="spawner",
         arguments=["effort_controllers"],
         output="screen",
     )
