@@ -1,12 +1,13 @@
 <?xml version="1.0" ?>
-<robot name="solo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="solo12" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:property name="color_name" value="grey"/>
     <xacro:property name="color" value="0.8 0.8 0.8"/>
     <xacro:property name="opacity" value="1.0"/>
     <xacro:property name="mesh_ext" value="stl"/>
 
-    <xacro:arg name="use_fake_hardware" default="true"/>
+    <xacro:arg name="use_fake_hardware" default="false"/>
+    <xacro:arg name="use_sim" default="false"/>
     <xacro:arg name="prefix" default=""/>
 
     <!-- remove if using crane -->
@@ -55,7 +56,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/solo12/solo_12_base.${mesh_ext}"/>
+                <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/solo12/solo_12_base-collision.${mesh_ext}"/>
             </geometry>
             <material name="${color_name}">
                 <color rgba="${color} ${opacity}"/>
@@ -121,13 +122,11 @@
 
     <gazebo reference="base_link">
         <material>Gazebo/White</material>
-<!--        <selfCollide>true</selfCollide>-->
-        <!--        <gravity>true</gravity>-->
     </gazebo>
 
     <gazebo>
         <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-            <parameters>$(find ros2_control_solo_bringup)/config/solo_gazebo_forward_controller_position.yaml
+            <parameters>$(find ros2_control_solo_bringup)/config/solo_gazebo_test_controllers_mod.yaml
             </parameters>
         </plugin>
     </gazebo>

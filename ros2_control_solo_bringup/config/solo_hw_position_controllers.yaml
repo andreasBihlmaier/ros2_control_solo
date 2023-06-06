@@ -1,0 +1,33 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 1000  # Hz
+
+    imu_sensor_broadcaster:
+      type: imu_sensor_broadcaster/IMUSensorBroadcaster
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+     
+    position_controllers:
+      type: position_controllers/JointGroupPositionController
+
+imu_sensor_broadcaster:
+  ros__parameters:
+    frame_id: imu
+    sensor_name: IMU
+
+position_controllers:
+  ros__parameters:
+    joints:
+      - FL_HAA
+      - FL_HFE
+      - FL_KFE
+      - FR_HAA
+      - FR_HFE
+      - FR_KFE
+      - HL_HAA
+      - HL_HFE
+      - HL_KFE
+      - HR_HAA
+      - HR_HFE
+      - HR_KFE

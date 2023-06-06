@@ -1,0 +1,80 @@
+#controller_manager:
+#  ros__parameters:
+#    update_rate: 1000  # Hz
+#
+#    joint_state_broadcaster:
+#      type: joint_state_broadcaster/JointStateBroadcaster
+#     
+#    effort_controllers:
+#      type: effort_controllers/JointGroupEffortController
+#
+#effort_controllers:
+#  ros__parameters:
+#    joints:
+#      - FL_HAA
+#      - FL_HFE
+#      - FL_KFE
+#      - FR_HAA
+#      - FR_HFE
+#      - FR_KFE
+#      - HL_HAA
+#      - HL_HFE
+#      - HL_KFE
+#      - HR_HAA
+#      - HR_HFE
+#      - HR_KFE
+
+controller_manager:
+  ros__parameters:
+    use_sim_time: True
+    update_rate: 1000  # Hz
+
+    joint_states_controller:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+joint_trajectory_controller:
+  ros__parameters:
+    use_sim_time: True
+    type: joint_trajectory_controller/JointTrajectoryController
+    joints:
+      - FL_HAA
+      - FL_HFE
+      - FL_KFE
+      - FR_HAA
+      - FR_HFE
+      - FR_KFE
+      - HL_HAA
+      - HL_HFE
+      - HL_KFE
+      - HR_HAA
+      - HR_HFE
+      - HR_KFE
+
+    command_interfaces:
+#      - position
+#      - velocity
+      - effort
+
+    state_interfaces:
+      - position
+      - velocity
+
+    #open_loop_control: true
+
+    gains:
+      # i_clamp: ...
+      FL_HAA: { p: 300.0, i: 0.0, d: 0.0 }
+      FL_HFE: { p: 300.0, i: 0.0, d: 0.0 }
+      FL_KFE: { p: 300.0, i: 0.0, d: 0.0 }
+      FR_HAA: { p: 300.0, i: 0.0, d: 0.0 }
+      FR_HFE: { p: 300.0, i: 0.0, d: 0.0 }
+      FR_KFE: { p: 300.0, i: 0.0, d: 0.0 }
+      HL_HAA: { p: 300.0, i: 0.0, d: 0.0 }
+      HL_HFE: { p: 300.0, i: 0.0, d: 0.0 }
+      HL_KFE: { p: 300.0, i: 0.0, d: 0.0 }
+      HR_HAA: { p: 300.0, i: 0.0, d: 0.0 }
+      HR_HFE: { p: 300.0, i: 0.0, d: 0.0 }
+      HR_KFE: { p: 300.0, i: 0.0, d: 0.0 }

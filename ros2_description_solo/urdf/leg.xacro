@@ -26,7 +26,7 @@
             <joint name="${prefix}_HAA" type="revolute">
                 <parent link="base_link"/>
                 <child link="${prefix}_SHOULDER"/>
-                <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="2"/>
+                <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="80"/>
                 <!-- joints rotates around the x-axis -->
                 <axis xyz="1 0 0"/>
                 <!-- placement of the joint -->
@@ -46,8 +46,7 @@
                         <origin xyz="${-base_2_HAA_x} ${-base_2_HAA_y} 0" rpy="0 0 0"/>
                     </xacro:if>
                 </xacro:unless>
-                <!-- pybullet simulation parameters -->
-                <dynamics damping="0.0" friction="0.0"/>
+                <dynamics damping="0.1" friction="0.0"/>
             </joint>
             <link name="${prefix}_SHOULDER">
                 <!-- TODO Update inertias. -->
@@ -92,13 +91,13 @@
                         <xacro:if value="${is_front}">
                             <origin xyz="0.01950 0 0" rpy="0 0 0"/>
                             <geometry>
-                                <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/solo12/solo12_hip_fe_fl.${mesh_ext}"/>
+                                <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/solo12/solo12_hip_fe_fl-collision.${mesh_ext}"/>
                             </geometry>
                         </xacro:if>
                         <xacro:unless value="${is_front}">
                             <origin xyz="-0.01950 0 0" rpy="0 0 0"/>
                             <geometry>
-                                <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/solo12/solo12_hip_fe_hl.${mesh_ext}"/>
+                                <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/solo12/solo12_hip_fe_hl-collision.${mesh_ext}"/>
                             </geometry>
                         </xacro:unless>
                     </xacro:unless>
@@ -106,13 +105,13 @@
                         <xacro:if value="${is_front}">
                             <origin xyz="0.01950 0 0" rpy="0 0 0"/>
                             <geometry>
-                                <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/solo12/solo12_hip_fe_fr.${mesh_ext}"/>
+                                <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/solo12/solo12_hip_fe_fr-collision.${mesh_ext}"/>
                             </geometry>
                         </xacro:if>
                         <xacro:unless value="${is_front}">
                             <origin xyz="-0.01950 0 0" rpy="0 0 0"/>
                             <geometry>
-                                <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/solo12/solo12_hip_fe_hr.${mesh_ext}"/>
+                                <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/solo12/solo12_hip_fe_hr-collision.${mesh_ext}"/>
                             </geometry>
                         </xacro:unless>
                     </xacro:if>
@@ -159,7 +158,7 @@
             <joint name="${prefix}_HFE" type="revolute">
                 <parent link="${prefix}_SHOULDER"/>
                 <child link="${prefix}_UPPER_LEG"/>
-                <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="2"/>
+                <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="80"/>
                 <!-- joints rotates around the y-axis -->
                 <axis xyz="0 1 0"/>
                 <!-- placement of the joint -->
@@ -169,8 +168,7 @@
                 <xacro:unless value="${is_right}">
                     <origin xyz="0 ${HAA_2_HFE_y} 0" rpy="0 0 0"/>
                 </xacro:unless>
-                <!-- pybullet simulation parameters -->
-                <dynamics damping="0.0" friction="0.0"/>
+                <dynamics damping="0.1" friction="0.0"/>
             </joint>
         </xacro:if>
         <xacro:unless value="${has_side_motion}">
@@ -178,7 +176,7 @@
             <joint name="${prefix}_HFE" type="revolute">
                 <parent link="base_link"/>
                 <child link="${prefix}_UPPER_LEG"/>
-                <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="2"/>
+                <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="80"/>
                 <!-- joints rotates around the y-axis -->
                 <axis xyz="0 1 0"/>
                 <!-- placement of the joint -->
@@ -198,8 +196,7 @@
                         <origin xyz="${-base_2_HFE_x} ${-base_2_HFE_y} 0" rpy="0 0 0"/>
                     </xacro:if>
                 </xacro:unless>
-                <!-- pybullet simulation parameters -->
-<!--                <dynamics damping="0.0" friction="0.01"/>-->
+                <dynamics damping="0.1" friction="0.0"/>
             </joint>
         </xacro:unless>
 
@@ -245,10 +242,10 @@
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
                     <xacro:unless value="${is_right}">
-                        <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/with_foot/solo_upper_leg_left_side.${mesh_ext}"/>
+                        <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/with_foot/solo_upper_leg_left_side-collision.${mesh_ext}"/>
                     </xacro:unless>
                     <xacro:if value="${is_right}">
-                        <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/with_foot/solo_upper_leg_right_side.${mesh_ext}"/>
+                        <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/with_foot/solo_upper_leg_right_side-collision.${mesh_ext}"/>
                     </xacro:if>
                 </geometry>
                 <material name="${color_name}">
@@ -266,7 +263,7 @@
         <joint name="${prefix}_KFE" type="revolute">
             <parent link="${prefix}_UPPER_LEG"/>
             <child link="${prefix}_LOWER_LEG"/>
-            <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="2"/>
+            <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="80"/>
             <!-- joints rotates around the y-axis -->
             <axis xyz="0 1 0"/>
             <!-- placement of the joint -->
@@ -286,8 +283,7 @@
                     <origin xyz="0 ${-HFE_2_KFE_y} ${-HFE_2_KFE_z}" rpy="0 0 0"/>
                 </xacro:if>
             </xacro:unless>
-            <!-- pybullet simulation parameters -->
-<!--            <dynamics damping="0.0" friction="0.0"/>-->
+            <dynamics damping="0.1" friction="0.0"/>
         </joint>
 
         <link name="${prefix}_LOWER_LEG">
@@ -332,10 +328,10 @@
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
                     <xacro:unless value="${is_right}">
-                        <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/with_foot/solo_lower_leg_left_side.${mesh_ext}"/>
+                        <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/with_foot/solo_lower_leg_left_side-collision.${mesh_ext}"/>
                     </xacro:unless>
                     <xacro:if value="${is_right}">
-                        <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/with_foot/solo_lower_leg_right_side.${mesh_ext}"/>
+                        <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/with_foot/solo_lower_leg_right_side-collision.${mesh_ext}"/>
                     </xacro:if>
                 </geometry>
                 <material name="${color_name}">
@@ -362,9 +358,8 @@
                 <origin xyz="0 ${-KFE_2_FOOT_y} ${-KFE_2_FOOT_z}" rpy="0 0 0"/>
             </xacro:if>
             <!-- Limits (usefull?) -->
-            <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="2"/>
-            <!-- pybullet simulation parameters -->
-<!--            <dynamics damping="0.0" friction="0.0"/>-->
+            <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="80"/>
+            <dynamics damping="0.1" friction="0.0"/>
         </joint>
 
         <link name="${prefix}_FOOT">
@@ -391,11 +386,12 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/with_foot/solo_foot.${mesh_ext}"/>
+                    <mesh filename="file://$(find ros2_description_solo)/meshes/${mesh_ext}/with_foot/solo_foot-collision.${mesh_ext}"/>
                 </geometry>
                 <material name="${color_name}">
                     <color rgba="${color} ${opacity}"/>
                 </material>
+                <!--
                 <gazebo>
                     <surface>
                         <contact>
@@ -420,6 +416,7 @@
                         </friction>
                     </surface>
                 </gazebo>
+                -->
             </collision>
         </link> <!-- END LOWER LEG LINK -->
 
@@ -443,9 +440,15 @@
         </gazebo>
 
         <gazebo reference="${prefix}_FOOT">
-            <material>Gazebo/White</material>
 <!--            <selfCollide>true</selfCollide>-->
 <!--            <gravity>true</gravity>-->
+            <kp>1000000.0</kp>
+            <kd>1.0</kd>
+            <mu1>0.8</mu1>
+            <mu2>0.8</mu2>
+            <maxVel>1.0</maxVel>
+            <minDepth>0.001</minDepth>
+            <material>Gazebo/FlatBlack</material>
         </gazebo>
 
     </xacro:macro>

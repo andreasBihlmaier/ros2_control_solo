@@ -1,0 +1,69 @@
+robot:
+    interface: enp12s0
+    joint_modules:
+        # FL_HAA, FL_HFE, FL_KFE,
+        # FR_HAA, FR_HFE, FR_KFE,
+        # HL_HAA, HL_HFE, HL_KFE,
+        # HR_HAA, HR_HFE, HR_KFE,
+        motor_numbers: [
+            0, 3, 2,
+            1, 5, 4,
+            6, 9, 8,
+            7, 11, 10
+        ]
+        motor_constants: 0.025
+        gear_ratios: 9.
+        max_currents: 8.
+        reverse_polarities: [
+            false, true, true,
+            true, false, false,
+            false, true, true,
+            true, false, false
+        ]
+        lower_joint_limits: [
+            -0.9, -1.7, -2.8,
+            -0.9, -1.7, -2.8,
+            -0.9, -1.7, -2.8,
+            -0.9, -1.7, -2.8
+        ]
+        upper_joint_limits: [
+            0.9,  1.45,  2.8,
+            0.9,  1.45,  2.8,
+            0.9,  1.45,  2.8,
+            0.9,  1.45,  2.8
+        ]
+        max_joint_velocities: 80.
+        safety_damping: 0.2
+    imu:
+        rotate_vector: [1, 2, 3]
+        orientation_vector: [1, 2, 3, 4]
+joint_calibrator:
+    # Can be either POS, NEG, ALT or AUTO
+    search_methods: [
+      POS, POS, POS,
+      NEG, POS, POS,
+      POS, POS, POS,
+      NEG, POS, POS
+    ]
+    position_offsets: [
+         0.3285,  0.0901,  0.4327,
+        -0.2543,  0.0008,  0.6522,
+         0.0035,  0.3855,  0.3167,
+        -0.2385,  0.5991,  0.4539,
+    ]
+    calib_order: [
+        1, 0, 0,
+        1, 0, 0,
+        1, 0, 0,
+        1, 0, 0
+    ]
+    calib_pos: [
+        0.0,  1.2, -2.4,
+        0.0,  1.2, -2.4,
+        0.0, -1.2,  2.4,
+        0.0, -1.2,  2.4
+    ]
+    Kp: 5.
+    Kd: 0.05
+    T: 1.
+    dt: 0.001

@@ -76,22 +76,21 @@ def generate_launch_description():
     )
 
     # Using a URDF file
+    # spawn_entity = Node(
+    #     package="gazebo_ros",
+    #     executable="spawn_entity.py",
+    #     arguments=["-topic", "robot_description", "-entity", "solo", "-x 0", "-y 0", "-z 0.5"],
+    #     output="screen",
+    # )
+
+    # # Using a SDF file
     spawn_entity = Node(
         package="gazebo_ros",
         executable="spawn_entity.py",
-        arguments=["-topic", "robot_description",
-                   "-entity", "solo", "-x 0", "-y 0", "-z 0.5"],
+        arguments=["-file", sdf_model, "-entity",
+                   "solo", "-x 0", "-y 0", "-z 0.5"],
         output="screen",
     )
-
-    # # Using a SDF file
-    # spawn_entity = Node(
-    #    package="gazebo_ros",
-    #    executable="spawn_entity.py",
-    #    arguments=["-file", sdf_model, "-entity",
-    #               "solo", "-x 0", "-y 0", "-z 0.5"],
-    #    output="screen",
-    # )
 
     spawn_controller = Node(
         package="controller_manager",
@@ -100,10 +99,10 @@ def generate_launch_description():
         output="screen",
     )
 
-    spawn_controller_effort = Node(
+    spawn_controller_joint_trajectory = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["effort_controllers"],
+        arguments=["joint_trajectory_controller"],
         output="screen",
     )
 
@@ -116,6 +115,6 @@ def generate_launch_description():
             node_robot_state_publisher,
             spawn_entity,
             spawn_controller,
-            spawn_controller_effort,
+            spawn_controller_joint_trajectory,
         ]
     )
